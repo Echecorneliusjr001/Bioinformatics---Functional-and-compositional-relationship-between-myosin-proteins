@@ -24,19 +24,38 @@ This repository presents an analysis pipeline for exploring muscle-related gene 
 
 ## 📂 Repository Structure
 
-.
-├── data/
-│ ├── resdf3.xlsx # Summary of cluster data and annotations
-│ └── other_data.pkl # Main gene annotation dataset
-├── scripts/
-│ ├── cluster_analysis.py # Scripts for filtering and annotation
-│ └── go_enrichment.py # Scripts for GO enrichment using gprofiler
-├── outputs/
-│ ├── pixel_<peptide>_<start>.xlsx # Per-cluster detailed gene info
-│ └── resdf.xlsx # Summary file with cluster metadata
-├── LICENSE # Creative Commons license file
-├── README.md
-└── requirements.txt
+data/
+ • resdf2.xlsx – Summary of gene clusters and metadata for MYO2_CAEEL
+ • resdf4.xlsx – Summary of gene clusters and metadata for V6CK14_CAEEL
+ • other_data.pkl – Main gene annotation dataset (pickled DataFrame)
+
+scripts/
+ • pickle cluster.py – Identifies myosin-containing or -free clusters, Performs GO enrichment analysis using g:Profiler
+ • V6CK14.py – Identifies NON-myosin enrinched Performed GO enrichment analysis using g:Profiler
+
+notebooks/
+ • pickle cluster.ipynb – Interactive walkthrough with visuals
+ • V6CK14.ipynb
+
+outputs/
+ • resdf.xlsx – Summary file indicating myosin presence
+ • go_enrichment_results.xlsx – Functional terms for non-myosin clusters
+ • annotated_gene_clusters.xlsx – Dataset with SD-based feature classes
+ • length_distribution.png – Histogram of protein lengths
+ • length_class_distribution.png – Feature class distribution plot
+
+figures/
+ • (Optional) Additional figures for manuscript or presentation use
+
+LICENSE
+ • Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+README.md
+ • Project overview, usage instructions, and licensing
+
+requirements.txt
+ • List of Python packages and dependencies
+
 
 
 ---
