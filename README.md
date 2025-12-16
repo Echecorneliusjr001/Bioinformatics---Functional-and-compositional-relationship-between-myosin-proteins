@@ -106,7 +106,7 @@ Open the notebooks in the notebooks/ directory and run cells sequentially.
 
 ---
 
-##📊 Outputs
+##📊  **Outputs**
 
 Typical outputs include:
 
@@ -121,12 +121,12 @@ Cluster-level summaries
 All outputs are stored in the outputs/ directory.
 ---
 
-##📚 License
+##📚 **License**
 
 This project is released under the CC0-1.0 Universal License, allowing unrestricted reuse, modification, and distribution.
 ---
 
-##📌 Notes
+##📌 **Notes**
 
 This repository accompanies a master’s thesis focused on protein composition as a predictor of biological function, demonstrating how compositional analysis adds value beyond sequence homology alone.
 Citation
@@ -139,7 +139,7 @@ Machine Learning Science & Technology, 5, 025081.
 
 ---
 
-##✉️ Contact
+##✉️ **Contact**
 
 For questions or collaboration inquiries, feel free to reach out via GitHub.
 
