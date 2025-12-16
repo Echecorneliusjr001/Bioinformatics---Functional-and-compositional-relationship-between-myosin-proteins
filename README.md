@@ -3,166 +3,139 @@ Bioinformatics: Functional and compositional analysis of muscle-related gene clu
 
 # 🧬 Bioinformatics: Functional & Compositional Analysis of Muscle-Related Gene Clusters in *C. elegans*
 
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![License: CC BY 4.0](https://licensebuttons.net/l/by/4.0/88x31.png)
-![Platform](https://img.shields.io/badge/Platform-Jupyter%20%7C%20Python-lightgrey)
+# Functional and Compositional Analysis of Myosin Proteins
 
-> Comprehensive functional and compositional analysis of gene clusters related to muscle proteins in *Caenorhabditis elegans*, focusing on **myosins**, **Gene Ontology (GO) enrichment**, and gene **feature distribution**.
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)
+![License](https://img.shields.io/badge/License-CC0--1.0-green.svg)
+![Status](https://img.shields.io/badge/Project-Completed-success)
+![Field](https://img.shields.io/badge/Field-Bioinformatics-orange)
+
+Bioinformatics project investigating the **functional and compositional relationships between myosin proteins** in *Caenorhabditis elegans*.  
+The work combines **amino-acid composition analysis, clustering, and functional enrichment** to complement traditional sequence-based approaches.
 
 ---
 
 ## 🧠 Project Overview
 
-This repository presents an analysis pipeline for exploring muscle-related gene clusters in *C. elegans*, with emphasis on:
+This repository contains scripts, notebooks, and outputs used to analyze muscle-related gene clusters in *C. elegans*, with a particular focus on **myosin isoforms (UNC-54, MYO-2)** and their compositional features.
 
-- Identifying clusters containing or excluding **myosin-related genes**.
-- Performing **GO enrichment analysis** on non-myosin clusters.
-- Characterizing gene feature distribution within clusters.
-- Exporting detailed cluster data and summary statistics for downstream interpretation.
+Myosin proteins are highly conserved motor proteins, yet individual isoforms perform distinct mechanical and structural roles in muscle. While sequence homology explains part of this diversity, it does not fully capture isoform-specific behavior.
+
+The analysis focuses primarily on **UNC-54** and **MYO-2** myosin isoforms in *C. elegans*.
+
+The project explores how:
+- Amino-acid composition contributes to protein function
+- Compositional similarity complements homology
+- Feature distributions relate to structural and functional specialization
 
 ---
 
-## 📂 Repository Structure
+## 📁 Repository Structure
 
-data/
- • resdf2.xlsx – Summary of gene clusters and metadata for MYO2_CAEEL
- • resdf4.xlsx – Summary of gene clusters and metadata for V6CK14_CAEEL
- • other_data.pkl – Main gene annotation dataset (pickled DataFrame)
-
-scripts/
- • pickle cluster.py – Identifies myosin-containing or -free clusters, Performs GO enrichment analysis using g:Profiler
- • V6CK14.py – Identifies NON-myosin enrinched Performed GO enrichment analysis using g:Profiler
-
-notebooks/
- • pickle cluster.ipynb – Interactive walkthrough with visuals
- • V6CK14.ipynb
-
-outputs/
- • resdf.xlsx – Summary file indicating myosin presence
- • go_enrichment_results.xlsx – Functional terms for non-myosin clusters
- • annotated_gene_clusters.xlsx – Dataset with SD-based feature classes
- • length_distribution.png – Histogram of protein lengths
- • length_class_distribution.png – Feature class distribution plot
-
-figures/
- • (Optional) Additional figures for manuscript or presentation use
-
-LICENSE
- • Creative Commons Attribution 4.0 International (CC BY 4.0)
-
-README.md
- • Project overview, usage instructions, and licensing
-
-requirements.txt
- • List of Python packages and dependencies
-
+├── data/ # Input datasets and processed summaries
+├── scripts/ # Python scripts for clustering and enrichment
+├── notebooks/ # Jupyter notebooks with analyses and plots
+├── outputs/ # Excel files and generated results
+├── figures/ # Figures used for interpretation/presentation
+├── LICENSE # CC0-1.0 Universal
+└── README.md # Project documentation
 
 
 ---
 
-## 🛠️ Features & Capabilities
+## 🚀 Key Features
 
-- Identification and classification of gene clusters by myosin content.
-- Filtering and exclusion of non-informative or myosin-related genes.
-- GO enrichment analysis via [gprofiler](https://biit.cs.ut.ee/gprofiler/gost).
-- Automated export of cluster-level data to Excel files.
-- Generation of summary tables capturing cluster composition and features.
-
----
-
-## 🧪 Methods & Workflow
-
-### 1. Gene Filtering & Cluster Grouping
-- Target peptides (e.g., myosins like `MYO2_CAEEL`) are used to filter relevant entries.
-- Genes are grouped by `Kclust` cluster IDs.
-- Clusters are flagged based on presence/absence of myosin-related genes (using keywords like `myo-1`, `myo-3`, `unc-54`).
-
-### 2. Gene Ontology (GO) Enrichment
-- Clusters without myosin genes are subjected to GO enrichment analysis using `gprofiler`.
-- Non-informative sources (e.g., transcription factors, miRNAs) are filtered out.
-
-### 3. Output Generation
-- Cluster gene lists and annotation data are exported as Excel files for each peptide and start position.
-- A summary Excel file (`resdf.xlsx`) compiles cluster metadata and myosin presence flags.
+- Identification of myosin-containing and non-myosin gene clusters  
+- Gene Ontology (GO) enrichment analysis using **g:Profiler**  
+- Amino-acid feature distribution profiling  
+- Feature-based clustering and comparison across isoforms  
+- Export of results to structured Excel files for downstream analysis  
 
 ---
 
-## 📊 Sample Output Preview
+## 🛠 Methodology
 
-| Start | Kclust | Othermyos |
-|-------|--------|------------|
-| 125   | 4      | False      |
-| 237   | 7      | True       |
-| ...   | ...    | ...        |
+### 1. C-pos (compositional-positional) encoding & Gene Clustering
+The workflow begins with segmentation of all annotated proteins from UniProt into overlapping 15-mer peptides, generating 2,425,165 million sequence windows suitable for uniform comparison. Each segment is encoded into a 19-dimensional C-Pos compositional vector, capturing amino-acid content and positional information. These vectors are grouped into ~20,000 clusters using K-means. Genes are grouped into clusters based on prior clustering outputs.  
+Clusters are annotated by detecting known myosin genes (e.g. *unc-54*, *myo-2*).
 
-- `Othermyos = False` indicates the cluster **does not contain myosin-related genes** and is prioritized for GO analysis.
+### 2. Functional Enrichment
+Clusters lacking myosin genes are subjected to GO enrichment analysis using the `gprofiler-official` Python package to uncover functional trends.
+
+### 3. Compositional Analysis
+Amino acids are categorized by chemical properties (charge, polarity, hydrophobicity, etc.), and feature distributions are compared across clusters and isoforms.
+
+### 4. Output Generation
+Results are saved as Excel files and figures suitable for reports, presentations, and further interpretation.
 
 ---
 
-## 💾 Analysis & Setup
+## Tools and Technologies
 
-### Prerequisites
+- **Python 3**
+- **Jupyter Notebook**
+- NumPy
+- Pandas
+- Matplotlib / Seaborn
+- Scikit-learn
+- STRING database (for interaction context)
 
-- Python 3.8 or higher
-- Required packages (listed in `requirements.txt`):
-  - pandas
-  - numpy
-  - Matplotlib
-  - Seaborn
-  - gprofiler-official
-  
+---
 
-### Analysis
+## Key Findings
 
-```Anaconda- jupyter nootebook
-# pickle cluster.ipynb
+- Protein composition provides a complementary lens to sequence homology
+- Overlapping compositional features indicate that homology alone cannot explain functional differences
+- Distinct compositional profiles—particularly in rod-like and disordered regions—correlate with isoform-specific mechanical and structural roles
+- Functional enrichment appears shaped by both homology and co-evolved compositional tuning
 
-# 📌 Example notebook: Muscle-Related Gene Cluster Analysis in C. elegans
+---
 
-import pandas as pd
-from gprofiler import GProfiler
+## 📦 Installation & Requirements
 
-# Load input data
-df_pkl = pd.read_pickle("data/other_data.pkl")
-summary_df = pd.read_excel("data/resdf3.xlsx")
-
-# Initialize GProfiler
-gp = GProfiler(return_dataframe=True)
-
-# Filter clusters that do not contain myosin-related genes
-no_myosin_clusters = summary_df[summary_df["Othermyos"] == False]["Kclust"].unique()
-
-results_list = []
-
-# Loop over non-myosin clusters and run GO enrichment
-for kclust_id in no_myosin_clusters:
-    subdf = df_pkl[df_pkl["Kclust"] == kclust_id]
-    gene_list = list(subdf["Gene Names (primary)"].dropna().unique())
-
-    if not gene_list:
-        continue
-
-    results = gp.profile(organism='celegans', query=gene_list, no_evidences=False)
-    results = results[~results["source"].isin(["TF", "MIRNA", "HP"])]
-    results["Kclust"] = kclust_id
-    results["GeneList"] = ", ".join(gene_list)
-    results_list.append(results)
-
-# Combine all results
-final_go_df = pd.concat(results_list)
-final_go_df.to_excel("outputs/go_enrichment_results.xlsx", index=False)
-
-print("✅ GO enrichment complete. Results saved.")
-```
+Clone the repository and install dependencies:
 
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Echecorneliusjr001/Bioinformatics---Functional-and-compositional-relationship-between-myosin-proteins.git
+2. Install dependencies
+pip install -r requirements.txt
+4. Launch Jupyter Notebook
+Open the notebooks in the notebooks/ directory and run cells sequentially.
 
-## 📚 References
+📊 Outputs
 
-C. elegans Genome Database: Uniprot.org
+Typical outputs include:
 
-GProfiler tool: https://biit.cs.ut.ee/gprofiler/
+annotated_gene_clusters.xlsx
 
-Myosin gene annotations: Relevant literatures and UniProt
+go_enrichment_results.xlsx
+
+Feature distribution plots
+
+Cluster-level summaries
+
+All outputs are stored in the outputs/ directory.
+
+📚 License
+
+This project is released under the CC0-1.0 Universal License, allowing unrestricted reuse, modification, and distribution.
+
+📌 Notes
+
+This repository accompanies a master’s thesis focused on protein composition as a predictor of biological function, demonstrating how compositional analysis adds value beyond sequence homology alone.
+Citation
+
+If you use or build upon this work, please cite the following study, which inspired the compositional analysis framework:
+
+Atsarina, L.A., Torbjörn, N.O., Maja, J., Maria-Jose, G.B., Sally, P.W., Bokarewa, M.I., Mezzasalma, S.A. & Katona, G. (2024).
+Deciphering peptide–protein interactions via composition-based prediction: a case study with survivin/BIRC5.
+Machine Learning Science & Technology, 5, 025081.
+
+✉️ Contact
+
+For questions or collaboration inquiries, feel free to reach out via GitHub.
+
 
 
